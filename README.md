@@ -43,13 +43,13 @@ src/
     ui/                 icons and buttons
   lib/                  server helpers: env, db, members, otp, whatsapp, rate limit
 prisma/                 schema and migrations
-scripts/generate-og.mjs builds public/og.jpg (link preview image)
+scripts/generate-og.mjs builds src/app/opengraph-image.jpg (link preview image)
 ```
 
 ## Before production
 
 - `src/lib/rate-limit.ts` keeps counters in memory. Use a shared store when running more than one instance.
-- Set `NEXT_PUBLIC_SITE_URL` so link previews use absolute URLs.
+- Set `NEXT_PUBLIC_SITE_URL` to the public domain. On Vercel it falls back to the production domain, so link previews always get an absolute image URL.
 - On Vercel, set every variable from `.env.example`. The `vercel-build` script applies pending migrations before building.
 
 ## Scripts

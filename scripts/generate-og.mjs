@@ -1,7 +1,8 @@
-// Builds public/og.jpg, the 1200x630 preview WhatsApp and social networks show for links.
+// Builds src/app/opengraph-image.jpg (and its twitter-image copy), the 1200x630 preview WhatsApp and social networks show for links.
 // Run with `npm run og` after changing the headline, photo or brand assets.
 // Kept as a small JPG (under 300 KB) because WhatsApp skips large preview images.
 import sharp from "sharp";
+import { copyFile } from "fs/promises";
 import { fileURLToPath } from "url";
 
 const root = fileURLToPath(new URL("..", import.meta.url));
@@ -39,6 +40,8 @@ await sharp(`${root}public/img/rio.jpg`)
     { input: mascot, left: 860, top: H - 12 - 470 },
   ])
   .jpeg({ quality: 82, mozjpeg: true })
-  .toFile(`${root}public/og.jpg`);
+  .toFile(`${root}src/app/opengraph-image.jpg`);
 
-console.log("public/og.jpg written");
+await copyFile(`${root}src/app/opengraph-image.jpg`, `${root}src/app/twitter-image.jpg`);
+
+console.log("src/app/opengraph-image.jpg and twitter-image.jpg written");

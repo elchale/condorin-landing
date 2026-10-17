@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist } from "next/font/google";
+import { siteUrl } from "@/lib/site";
 import "./globals.css";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
@@ -9,7 +10,7 @@ const DESCRIPTION =
   "Dragas y tajos abiertos, detectados por satélite. Te avisamos al instante por WhatsApp.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
+  metadataBase: new URL(siteUrl()),
   title: TITLE,
   description: DESCRIPTION,
   applicationName: "Condorin",
@@ -20,9 +21,9 @@ export const metadata: Metadata = {
     title: TITLE,
     description: DESCRIPTION,
     url: "/",
-    images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "Río de la Amazonía con la mascota de Condorin" }],
   },
-  twitter: { card: "summary_large_image", title: TITLE, description: DESCRIPTION, images: ["/og.jpg"] },
+  // Preview images come from app/opengraph-image.jpg and app/twitter-image.jpg
+  twitter: { card: "summary_large_image", title: TITLE, description: DESCRIPTION },
 };
 
 export const viewport: Viewport = { themeColor: "#ffffff" };
