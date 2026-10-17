@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Condorin
 
-## Getting Started
+Condorin monitors illegal gold mining in the Peruvian Amazon (river dredges and open-pit mines) from satellite imagery and alerts people by WhatsApp.
 
-First, run the development server:
+This repository is the public site: a landing page where people sign in with their WhatsApp number.
+
+## Stack
+
+- Next.js 15 (App Router) with TypeScript
+- Tailwind CSS 4
+- Prisma 7 on Neon Postgres
+- WhatsApp Cloud API for one-time sign-in codes
+
+## Getting started
 
 ```bash
+npm install
+cp .env.example .env.local   # then fill in the values
+npm run db:migrate           # creates the tables
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## How sign-in works
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. `POST /api/otp/send` checks consent, normalizes the number and sends a 6-digit code using a WhatsApp **authentication** template.
+2. The code is never stored. The browser gets an httpOnly cookie holding only an HMAC of the phone, the expiry and the code.
+3. `POST /api/otp/verify` recomputes the HMAC and, on match, records the member in Postgres and sets a signed session cookie (30 days).
 
-## Learn More
+Limits: one code per number every 45 seconds, 5 attempts per code, 10-minute expiry.
 
-To learn more about Next.js, take a look at the following resources:
+## Project layout
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+src/
+  app/                  routes: landing, /privacidad, /terminos, API handlers
+  components/
+    brand/              logo, nav, footer
+    landing/            one file per landing section
+    signin/             sign-in card and one component per step
+    legal/              shared layout for legal pages
+    ui/                 icons and buttons
+  lib/                  server helpers: env, db, members, otp, whatsapp, rate limit
+prisma/                 schema and migrations
+scripts/generate-og.mjs builds public/og.jpg (link preview image)
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Before production
 
-## Deploy on Vercel
+- `src/lib/rate-limit.ts` keeps counters in memory. Use a shared store when running more than one instance.
+- Set `NEXT_PUBLIC_SITE_URL` so link previews use absolute URLs.
+- On Vercel, set every variable from `.env.example`. The `vercel-build` script applies pending migrations before building.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Scripts
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Command | What it does |
+| --- | --- |
+| `npm run dev` | Development server |
+| `npm run build` | Production build |
+| `npm run lint` | ESLint |
+| `npm run typecheck` | TypeScript without emitting |
+| `npm run db:migrate` | Create and apply a migration in development |
+| `npm run db:deploy` | Apply pending migrations in production |
+| `npm run og` | Regenerate the link preview image |
+
+## Credits
+
+Photos from Wikimedia Commons; authors and licenses are listed in the site footer.

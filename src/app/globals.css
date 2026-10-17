@@ -1,26 +1,64 @@
 @import "tailwindcss";
 
+/* Condorin brand, taken from perushop-frontend/src/styles/variables.css (red-brand + zinc grays).
+   Swap these values (and only these) to rebrand. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --marca: #e11d2e;
+  --marca-2: #c40f20;
+  --marca-3: #a00c1a;
+  --marca-claro: #fff1f1;
+  --naranja: #f97316;
+  --naranja-claro: #fff3e9;
+  --tinta: #18181b;
+  --tinta-2: #27272a;
+  --gris: #52525b;
+  --borde: #e3e3e8;
+  --fondo: #f3f3f6;
+  --exito: #16a34a;
+  --exito-claro: #f0fdf4;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-marca: var(--marca);
+  --color-marca-2: var(--marca-2);
+  --color-marca-3: var(--marca-3);
+  --color-marca-claro: var(--marca-claro);
+  --color-naranja: var(--naranja);
+  --color-naranja-claro: var(--naranja-claro);
+  --color-tinta: var(--tinta);
+  --color-tinta-2: var(--tinta-2);
+  --color-gris: var(--gris);
+  --color-borde: var(--borde);
+  --color-fondo: var(--fondo);
+  --color-exito: var(--exito);
+  --color-exito-claro: var(--exito-claro);
+  --font-sans: var(--font-geist);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: clip;
+  background: #fff;
+  color: var(--tinta);
+  font-family: var(--font-geist), system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+:focus-visible {
+  outline: 3px solid var(--naranja);
+  outline-offset: 2px;
+}
+
+button:not(:disabled) {
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }

@@ -1,0 +1,20 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+/// Someone who signed in with a verified WhatsApp number.
+model Member {
+  id           String   @id @default(cuid())
+  /// Digits only, with country code, e.g. 51987654321.
+  phone        String   @unique
+  /// Last time the person accepted the terms and privacy policy (checked before every code).
+  consentAt    DateTime
+  lastSignInAt DateTime
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
