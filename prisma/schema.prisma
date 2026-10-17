@@ -18,3 +18,14 @@ model Member {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 }
+
+/// A Google account allowed into /admin. Signing in with Google proves who you are; a row here
+/// with `active = true` is what grants access, checked on every request.
+model Admin {
+  id        String   @id @default(cuid())
+  /// Lowercase, as Google returns it once verified.
+  email     String   @unique
+  name      String?
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+}

@@ -26,4 +26,10 @@ export const env = {
   get waTemplateLang() {
     return process.env.WA_TEMPLATE_LANG ?? "es";
   },
+  get googleClientId() {
+    return required("GOOGLE_CLIENT_ID");
+  },
+  get googleClientSecret() {
+    return required("GOOGLE_CLIENT_SECRET");
+  },
 };

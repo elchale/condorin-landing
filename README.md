@@ -30,18 +30,36 @@ Open http://localhost:3000.
 
 Limits: one code per number every 45 seconds, 5 attempts per code, 10-minute expiry.
 
+## Admin panel
+
+`/admin` is a private panel (not indexed) that signs in with Google.
+
+1. `/admin/entrar` links to `GET /api/admin/oauth/start`, which redirects to Google (authorization code flow with PKCE, state and nonce kept in a short-lived signed cookie).
+2. `GET /api/admin/oauth/callback` exchanges the code server side, checks the id_token, and issues an 8-hour signed session cookie only if the verified email has an active row in the `Admin` table.
+3. Every admin page calls `requireAdmin()`, which re-checks that row on each request, so setting `active = false` locks someone out immediately.
+
+Add an admin directly in the database:
+
+```sql
+INSERT INTO "Admin" (id, email, name) VALUES (gen_random_uuid()::text, 'someone@example.com', 'Name');
+```
+
+To add a section, add an entry to `src/lib/admin/sections.ts` (it feeds the sidebar and the overview) and a page under `src/app/admin/(panel)/` that starts with `await requireAdmin()`.
+
 ## Project layout
 
 ```
 src/
-  app/                  routes: landing, /privacidad, /terminos, API handlers
+  app/                  routes: landing, /privacidad, /terminos, /admin, API handlers
   components/
+    admin/              panel shell, navigation, formatting helpers
     brand/              logo, nav, footer
     landing/            one file per landing section
     signin/             sign-in card and one component per step
     legal/              shared layout for legal pages
     ui/                 icons and buttons
   lib/                  server helpers: env, db, members, otp, whatsapp, rate limit
+  lib/admin/            Google OAuth, admin session, guard, panel sections and queries
 prisma/                 schema and migrations
 scripts/generate-og.mjs builds src/app/opengraph-image.jpg (link preview image)
 ```
