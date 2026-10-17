@@ -32,4 +32,20 @@ export const env = {
   get googleClientSecret() {
     return required("GOOGLE_CLIENT_SECRET");
   },
+  // Qolca's SendGrid SMTP; only the password (the API key) has no sensible default.
+  get smtpHost() {
+    return process.env.SMTP_HOST ?? "smtp.sendgrid.net";
+  },
+  get smtpPort() {
+    return Number(process.env.SMTP_PORT ?? 587);
+  },
+  get smtpUser() {
+    return process.env.SMTP_USER ?? "apikey";
+  },
+  get smtpPass() {
+    return required("SMTP_PASS");
+  },
+  get mailFrom() {
+    return process.env.MAIL_FROM ?? "Condorin <info@qolca.org>";
+  },
 };

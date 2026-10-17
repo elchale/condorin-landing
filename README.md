@@ -44,6 +44,8 @@ Add an admin directly in the database:
 INSERT INTO "Admin" (id, email, name) VALUES (gen_random_uuid()::text, 'someone@example.com', 'Name');
 ```
 
+When someone signs up for the first time, every active admin gets an email (Qolca SendGrid SMTP, sent after the response so sign-in never waits on it). Recipients are read from the `Admin` table.
+
 To add a section, add an entry to `src/lib/admin/sections.ts` (it feeds the sidebar and the overview) and a page under `src/app/admin/(panel)/` that starts with `await requireAdmin()`.
 
 ## Project layout
