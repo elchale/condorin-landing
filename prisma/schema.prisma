@@ -1,3 +1,7 @@
+// The schema and its migrations belong to Django (repo elchale/condorin-backend, app `accounts`).
+// This file only maps Prisma onto those tables: never run `prisma migrate` or `prisma db push` here.
+// After a Django migration changes these tables, update the mapping and run `prisma generate`.
+
 generator client {
   provider = "prisma-client"
   output   = "../src/generated/prisma"
@@ -7,25 +11,29 @@ datasource db {
   provider = "postgresql"
 }
 
-/// Someone who signed in with a verified WhatsApp number.
+/// Someone who signed in with a verified WhatsApp number. Django: accounts.Member.
 model Member {
-  id           String   @id @default(cuid())
+  id           Int      @id @default(autoincrement())
   /// Digits only, with country code, e.g. 51987654321.
-  phone        String   @unique
+  phone        String   @unique @db.VarChar(15)
   /// Last time the person accepted the terms and privacy policy (checked before every code).
-  consentAt    DateTime
-  lastSignInAt DateTime
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  consentAt    DateTime @map("consent_at") @db.Timestamptz(6)
+  lastSignInAt DateTime @map("last_sign_in_at") @db.Timestamptz(6)
+  createdAt    DateTime @default(now()) @map("created") @db.Timestamptz(6)
+  updatedAt    DateTime @updatedAt @map("updated") @db.Timestamptz(6)
+
+  @@map("accounts_member")
 }
 
-/// A Google account allowed into /admin. Signing in with Google proves who you are; a row here
-/// with `active = true` is what grants access, checked on every request.
+/// A Google account allowed into /admin. Django: accounts.Admin. Signing in with Google proves who
+/// you are; a row here with `active = true` is what grants access, checked on every request.
 model Admin {
-  id        String   @id @default(cuid())
+  id        Int      @id @default(autoincrement())
   /// Lowercase, as Google returns it once verified.
-  email     String   @unique
-  name      String?
+  email     String   @unique @db.VarChar(254)
+  name      String?  @db.VarChar(120)
   active    Boolean  @default(true)
-  createdAt DateTime @default(now())
+  createdAt DateTime @default(now()) @map("created") @db.Timestamptz(6)
+
+  @@map("accounts_admin")
 }

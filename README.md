@@ -8,7 +8,7 @@ This repository is the public site: a landing page where people sign in with the
 
 - Next.js 16 (App Router) with TypeScript and React 19
 - Tailwind CSS 4
-- Prisma 7 on Neon Postgres
+- Prisma 7 on Neon Postgres, shared with the Django backend ([condorin-backend](https://github.com/elchale/condorin-backend)), which owns the schema and runs every migration
 - WhatsApp Cloud API for one-time sign-in codes
 
 ## Getting started
@@ -16,7 +16,7 @@ This repository is the public site: a landing page where people sign in with the
 ```bash
 npm install
 cp .env.example .env.local   # then fill in the values
-npm run db:migrate           # creates the tables
+# the tables come from the backend: run `python manage.py migrate` there
 npm run dev
 ```
 
@@ -80,9 +80,11 @@ scripts/generate-og.mjs builds src/app/opengraph-image.jpg (link preview image)
 | `npm run build` | Production build |
 | `npm run lint` | ESLint |
 | `npm run typecheck` | TypeScript without emitting |
-| `npm run db:migrate` | Create and apply a migration in development |
-| `npm run db:deploy` | Apply pending migrations in production |
 | `npm run og` | Regenerate the link preview image |
+
+## Database
+
+`prisma/schema.prisma` only maps onto tables created by Django (`accounts_member`, `accounts_admin`). Never run `prisma migrate` or `prisma db push`. When a Django migration changes those tables, update the mapping and run `npx prisma generate`.
 
 ## Credits
 

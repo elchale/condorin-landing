@@ -9,10 +9,7 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "og": "node scripts/generate-og.mjs",
-    "postinstall": "prisma generate",
-    "db:migrate": "prisma migrate dev",
-    "db:deploy": "prisma migrate deploy",
-    "vercel-build": "prisma migrate deploy && next build --turbopack"
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.10.1",
