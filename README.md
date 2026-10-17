@@ -6,7 +6,7 @@ This repository is the public site: a landing page where people sign in with the
 
 ## Stack
 
-- Next.js 15 (App Router) with TypeScript
+- Next.js 16 (App Router) with TypeScript and React 19
 - Tailwind CSS 4
 - Prisma 7 on Neon Postgres
 - WhatsApp Cloud API for one-time sign-in codes
