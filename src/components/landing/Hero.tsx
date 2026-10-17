@@ -2,6 +2,7 @@ import Image from "next/image";
 import { SiteNav } from "@/components/brand/SiteNav";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Icon } from "@/components/ui/Icon";
+import { PETITION_URL } from "@/lib/links";
 import mascot from "../../../public/brand/condor-thumbsup.png";
 import river from "../../../public/img/rio.jpg";
 
@@ -27,6 +28,15 @@ export function Hero() {
               Cómo funciona
             </ButtonLink>
           </div>
+          <a
+            href={PETITION_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-5 inline-flex items-center gap-2 font-bold text-marca underline underline-offset-4 hover:text-marca-2"
+          >
+            <Icon name="pen" className="size-5" />
+            Firma la petición por alertas satelitales
+          </a>
         </div>
 
         {/* The mascot stays inside the photo's width so nothing pushes past the page gutter */}

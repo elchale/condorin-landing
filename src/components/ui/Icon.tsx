@@ -6,6 +6,7 @@ const PATHS = {
   drop: "M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5S12.5 5.5 12 3c-.5 2.5-2 4.9-4 6.5S5 13 5 15a7 7 0 0 0 7 7z",
   arrow: "M5 12h14M13 6l6 6-6 6",
   back: "M19 12H5M11 18l-6-6 6-6",
+  pen: "M12 20h9M16.4 3.6a2.1 2.1 0 1 1 3 3L7 19l-4 1 1-4Z",
 } as const;
 
 export type IconName = keyof typeof PATHS;

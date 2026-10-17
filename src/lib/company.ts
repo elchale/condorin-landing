@@ -2,7 +2,8 @@
 export const COMPANY = {
   legalName: "Qolca Solutions S.A.C.",
   ruc: "20613914464",
-  address: "Lima, Perú",
+  /** Domicilio fiscal registered with SUNAT (same entity as Comehometag). */
+  address: "Pj. Tiziano Muñoz 155, Urb. Ingeniería, San Martín de Porres, Lima, Perú",
   email: "info@qolca.org",
 } as const;
 
