@@ -64,7 +64,7 @@ export async function loadMapa(): Promise<{ mapa: Mapa; source: MapaSource }> {
 }
 
 /** Static open data layers, bundled from public/data/layers.json (an empty list hides the Capas tab). */
-export const layers: LayerEntry[] = Array.isArray(layersManifest) ? (layersManifest as LayerEntry[]) : [];
+export const layers: LayerEntry[] = Array.isArray(layersManifest) ? (layersManifest as unknown as LayerEntry[]) : [];
 
 /**
  * Member and admin state for the top bar and the "Mis detecciones" filter. Reads both cookies and,

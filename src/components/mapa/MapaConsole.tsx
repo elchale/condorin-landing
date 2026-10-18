@@ -204,7 +204,7 @@ export function MapaConsole({ mapa, layers, viewer, kpis }: Props) {
   const sheetStyle = { "--sheet-y": SNAP_Y[snap], "--sheet-scroll": SNAP_SCROLL[snap] } as CSSProperties;
 
   return (
-    <div className="odc relative h-[calc(100dvh-56px)] overflow-hidden">
+    <div className="odc relative h-[calc(100dvh-56px)] overflow-clip">
       {/* Map area: the static placeholder is the same box, so mounting the map never moves anything. */}
       <div className="odc-placeholder absolute inset-x-0 top-0 bottom-[124px] isolate lg:bottom-0 lg:left-[360px]">
         {mountMap && (
