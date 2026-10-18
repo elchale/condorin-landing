@@ -14,45 +14,17 @@ export const env = {
   get otpSecret() {
     return required("OTP_SECRET");
   },
-  get waToken() {
-    return required("WA_TOKEN");
-  },
-  get waPhoneNumberId() {
-    return required("WA_PHONE_NUMBER_ID");
-  },
-  get waTemplate() {
-    return process.env.WA_TEMPLATE ?? "condorin_codigo";
-  },
-  get waTemplateLang() {
-    return process.env.WA_TEMPLATE_LANG ?? "es";
-  },
   get googleClientId() {
     return required("GOOGLE_CLIENT_ID");
   },
   get googleClientSecret() {
     return required("GOOGLE_CLIENT_SECRET");
   },
-  // Qolca's SendGrid SMTP; only the password (the API key) has no sensible default.
-  get smtpHost() {
-    return process.env.SMTP_HOST ?? "smtp.sendgrid.net";
-  },
-  get smtpPort() {
-    return Number(process.env.SMTP_PORT ?? 587);
-  },
-  get smtpUser() {
-    return process.env.SMTP_USER ?? "apikey";
-  },
-  get smtpPass() {
-    return required("SMTP_PASS");
-  },
-  // The Django API (condorin-backend). Only this server talks to it; browsers go through /api/expedientes.
+  // The Django API (condorin-backend). Only this server talks to it (the /admin/en-vivo feed).
   get apiUrl() {
     return (process.env.CONDORIN_API_URL ?? "https://api.condorin.pe").replace(/\/$/, "");
   },
   get panelApiSecret() {
     return required("PANEL_API_SECRET");
-  },
-  get mailFrom() {
-    return process.env.MAIL_FROM ?? "Ojo de Cóndor <info@qolca.org>";
   },
 };

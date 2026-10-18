@@ -2,10 +2,10 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Ojo de Cóndor · Alertas de minería ilegal",
+    name: "Ojo de Cóndor · Panel",
     short_name: "Ojo de Cóndor",
-    description: "Alertas de dragas y minería ilegal de tajo abierto por WhatsApp.",
-    start_url: "/",
+    description: "Panel de administración de Ojo de Cóndor.",
+    start_url: "/admin",
     display: "standalone",
     background_color: "#ffffff",
     theme_color: "#e11d2e",

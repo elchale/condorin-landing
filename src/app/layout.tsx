@@ -5,25 +5,12 @@ import "./globals.css";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
 
-const TITLE = "Ojo de Cóndor · Vigilamos la minería ilegal en la Amazonía";
-const DESCRIPTION =
-  "Dragas y tajos abiertos, detectados por satélite. Te avisamos al instante por WhatsApp.";
-
+// Admin only app (admin.condorin.pe): nothing here is meant for search engines or link previews.
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl()),
-  title: TITLE,
-  description: DESCRIPTION,
+  title: "Panel · Ojo de Cóndor",
   applicationName: "Ojo de Cóndor",
-  openGraph: {
-    type: "website",
-    locale: "es_PE",
-    siteName: "Ojo de Cóndor",
-    title: TITLE,
-    description: DESCRIPTION,
-    url: "/",
-  },
-  // Preview images come from app/opengraph-image.jpg and app/twitter-image.jpg
-  twitter: { card: "summary_large_image", title: TITLE, description: DESCRIPTION },
+  robots: { index: false, follow: false, nocache: true },
 };
 
 export const viewport: Viewport = { themeColor: "#ffffff" };
