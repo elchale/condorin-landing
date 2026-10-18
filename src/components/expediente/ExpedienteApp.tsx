@@ -4,12 +4,14 @@ import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { Logo } from "@/components/brand/Logo";
 import { AlertSection } from "./AlertSection";
-import { ExpedienteError, loadExpediente, saveExpediente, signInWithLink } from "./api";
+import { ExpedienteError, loadExpediente, saveExpediente } from "./api";
 import { AuthoritiesSection } from "./AuthoritiesSection";
 import { ConfirmSection } from "./ConfirmSection";
 import { DenuncianteSection } from "./DenuncianteSection";
 import { FilingSection } from "./FilingSection";
 import { HechosSection } from "./HechosSection";
+import { OpenInBrowser } from "./OpenInBrowser";
+import { useLinkSignIn } from "./useLinkSignIn";
 import type { ApiError, Patch, Payload } from "./types";
 import { card, fieldId, primaryButton } from "./ui";
 
@@ -29,7 +31,7 @@ export function ExpedienteApp({ token, signedIn: initiallySignedIn }: { token: s
   const [saveState, setSaveState] = useState<SaveState>("idle");
   const [notice, setNotice] = useState("");
   const [emailedTo, setEmailedTo] = useState<string[]>();
-  const [signedIn, setSignedIn] = useState(initiallySignedIn);
+  const { signedIn, overlay } = useLinkSignIn(token, initiallySignedIn);
 
   const load = useCallback(() => {
     setLoadError(null);
@@ -39,11 +41,6 @@ export function ExpedienteApp({ token, signedIn: initiallySignedIn }: { token: s
   }, [token]);
 
   useEffect(load, [load]);
-
-  // Opening the alert link signs the member in, so the panel is one tap away (see /api/enlace).
-  useEffect(() => {
-    if (!initiallySignedIn) signInWithLink(token).then(setSignedIn);
-  }, [initiallySignedIn, token]);
 
   const save = useCallback(
     async (patch: Patch) => {
@@ -83,11 +80,20 @@ export function ExpedienteApp({ token, signedIn: initiallySignedIn }: { token: s
     requestAnimationFrame(() => document.getElementById(fieldId(first))?.scrollIntoView({ behavior: "smooth", block: "start" }));
   }
 
-  if (loadError) return <Frame signedIn={signedIn}><LoadError error={loadError} onRetry={load} /></Frame>;
+  if (loadError) {
+    return (
+      <Frame signedIn={signedIn}>
+        {overlay}
+        <LoadError error={loadError} onRetry={load} />
+      </Frame>
+    );
+  }
   if (!data) {
     return (
       <Frame signedIn={signedIn}>
-        <p className={`${card} text-center text-gris`} role="status">
+        {overlay}
+        <OpenInBrowser token={token} />
+        <p className={`${card} mt-4 text-center text-gris`} role="status">
           Abriendo el expediente…
         </p>
       </Frame>
@@ -100,7 +106,9 @@ export function ExpedienteApp({ token, signedIn: initiallySignedIn }: { token: s
 
   return (
     <Frame signedIn={signedIn} saveState={e.status === "draft" ? saveState : "idle"}>
+      {overlay}
       <div className="space-y-4">
+        <OpenInBrowser token={token} />
         <header>
           <p className="text-sm font-semibold text-gris">{data.ong.name}</p>
           <h1 className="text-2xl font-black tracking-tight sm:text-3xl">

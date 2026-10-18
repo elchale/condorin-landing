@@ -24,14 +24,15 @@ export async function POST(req: Request) {
   const token = String(body.token ?? "");
   if (!/^[\w-]{16,64}$/.test(token)) return NextResponse.json({ signedIn: false });
 
-  const result = await callApi<{ phone: string }>("/api/v1/panel/enlace", {
+  const result = await callApi<{ phone: string; name: string; ong: string }>("/api/v1/panel/enlace", {
     method: "POST",
     body: { token },
     forwardedFor: req.headers.get("x-forwarded-for"),
   });
   if (!result.ok) return NextResponse.json({ signedIn: false });
 
-  const res = NextResponse.json({ signedIn: true });
+  // fresh: this request created the session, so the page shows the "Entraste como <ONG>" overlay.
+  const res = NextResponse.json({ signedIn: true, fresh: true, name: result.data.name, ong: result.data.ong });
   res.cookies.set(SESSION_COOKIE, sessionToken(result.data.phone, LINK_SESSION_TTL_SECONDS), cookieOptions(LINK_SESSION_TTL_SECONDS));
   return res;
 }

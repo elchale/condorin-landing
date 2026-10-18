@@ -2,15 +2,16 @@ import type { Metadata } from "next";
 import { IncidentCard } from "@/components/panel/IncidentCard";
 import { PanelShell } from "@/components/panel/PanelShell";
 import { PanelTotals } from "@/components/panel/PanelTotals";
+import { PanelWelcome } from "@/components/panel/PanelWelcome";
 import { loadPanel } from "@/lib/panel";
 import { requirePhone } from "@/lib/session";
 
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = { title: "Mi panel · Condorin", robots: { index: false, follow: false } };
 
-export default async function PanelPage({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
+export default async function PanelPage({ searchParams }: { searchParams: Promise<{ error?: string; bienvenida?: string }> }) {
   const phone = await requirePhone();
-  const [result, { error }] = await Promise.all([loadPanel(phone), searchParams]);
+  const [result, { error, bienvenida }] = await Promise.all([loadPanel(phone), searchParams]);
 
   if (!result.ok) {
     return (
@@ -25,6 +26,7 @@ export default async function PanelPage({ searchParams }: { searchParams: Promis
   const { member, ong, totals, incidents } = result.data;
   return (
     <PanelShell member={member} ongName={ong.name}>
+      {bienvenida && <PanelWelcome ong={ong.name} name={member.name} />}
       <header>
         <p className="text-sm font-semibold text-gris">{ong.name}</p>
         <h1 className="mt-1 text-2xl font-black tracking-tight sm:text-3xl">

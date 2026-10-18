@@ -42,16 +42,18 @@ export type SendResult =
 export const sendExpediente = (token: string, code?: string) =>
   call<SendResult["data"]>(`${base(token)}/enviar`, "POST", code ? { code } : {}) as Promise<SendResult>;
 
+export type LinkSignIn = { signedIn: boolean; fresh?: boolean; name?: string; ong?: string };
+
 /** Ask this site to sign in the member the WhatsApp link was sent to. Never throws. */
-export async function signInWithLink(token: string): Promise<boolean> {
+export async function signInWithLink(token: string): Promise<LinkSignIn> {
   try {
     const res = await fetch("/api/enlace", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ token }),
     });
-    return Boolean((await res.json()).signedIn);
+    return (await res.json()) as LinkSignIn;
   } catch {
-    return false;
+    return { signedIn: false };
   }
 }

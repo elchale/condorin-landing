@@ -42,7 +42,7 @@ export function SignInCard() {
     run(async () => {
       await verifyCode(code);
       setStep("done");
-      router.push("/panel");
+      router.push("/panel?bienvenida=1");
     });
 
   return (

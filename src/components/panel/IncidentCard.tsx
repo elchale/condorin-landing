@@ -1,4 +1,4 @@
-import { openExpediente } from "@/app/panel/actions";
+import { openIncident } from "@/app/panel/actions";
 import { Icon } from "@/components/ui/Icon";
 import type { Incident } from "@/lib/panel";
 
@@ -88,16 +88,16 @@ export function IncidentCard({ incident }: { incident: Incident }) {
 
         <p className="mt-4 text-sm">{step.note}</p>
         <div className="mt-auto flex flex-col gap-3 pt-4 sm:flex-row sm:flex-wrap">
-          <form action={openExpediente} className="sm:contents">
+          <form action={openIncident} className="flex flex-col gap-3 sm:contents">
             <input type="hidden" name="incident" value={incident.id} />
-            <button type="submit" className={step.style}>
+            <button type="submit" name="to" value="expediente" className={step.style}>
               {step.button}
               <Icon name="arrow" className="size-5" />
             </button>
+            <button type="submit" name="to" value="evento" className="inline-flex items-center justify-center px-2 py-3 font-semibold text-marca underline underline-offset-2">
+              Ver evento
+            </button>
           </form>
-          <a href={incident.maps_url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center px-2 py-3 font-semibold text-marca underline underline-offset-2">
-            Ver en el mapa
-          </a>
         </div>
       </div>
     </article>

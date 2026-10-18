@@ -70,6 +70,9 @@ export type Payload = {
     captured_at_label: string;
     model: string;
     detections: Detection[];
+    /** Detections below the confidence threshold, stored but not alerted. */
+    discarded: number;
+    threshold: number;
     scene: { uri: string; md5_hash: string; crc32c: string; size_bytes: number | null; download_url: string | null };
     history: { captured_at: string; label: string; satellite: string; detections: number }[];
   };
