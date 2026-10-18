@@ -15,12 +15,10 @@ export const CALLBACK_PATH = "/api/admin/oauth/callback";
 /**
  * Origins allowed to start sign-in. The Host header is caller-controlled, so the redirect URI is
  * only ever built from this list. Vercel preview URLs are not on it, so /admin only works on the
- * real domains and localhost. admin.condorin.pe is the admin host, so it is the fallback for any
- * other origin; NEXT_PUBLIC_SITE_URL, when set, goes first. www and apex stay while they still
- * point here.
+ * real domains and localhost.
  */
 function allowedOrigins() {
-  const list = ["https://admin.condorin.pe", "https://www.condorin.pe", "https://condorin.pe", "http://localhost:3000"];
+  const list = ["https://www.condorin.pe", "https://condorin.pe", "http://localhost:3000"];
   if (process.env.NEXT_PUBLIC_SITE_URL) list.unshift(new URL(process.env.NEXT_PUBLIC_SITE_URL).origin);
   return [...new Set(list)];
 }
