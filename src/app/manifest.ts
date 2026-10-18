@@ -2,8 +2,8 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Condorin · Alertas de minería ilegal",
-    short_name: "Condorin",
+    name: "Ojo de Cóndor · Alertas de minería ilegal",
+    short_name: "Ojo de Cóndor",
     description: "Alertas de dragas y minería ilegal de tajo abierto por WhatsApp.",
     start_url: "/",
     display: "standalone",

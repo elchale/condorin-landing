@@ -11,7 +11,7 @@ export function AlertPreview() {
             <CondorMark size={30} />
           </span>
           <div className="text-sm">
-            <p className="font-bold">Condorin</p>
+            <p className="font-bold">Ojo de Cóndor</p>
             <p className="text-white/60">Cuenta de empresa</p>
           </div>
         </div>

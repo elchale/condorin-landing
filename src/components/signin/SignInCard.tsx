@@ -9,8 +9,8 @@ import { PhoneStep } from "./PhoneStep";
 
 type Step = "phone" | "code" | "done";
 
-/** Phone number → WhatsApp code → signed in, straight to the member panel. */
-export function SignInCard() {
+/** Phone number → WhatsApp code → signed in, then to `nextPath` (the member panel by default). */
+export function SignInCard({ nextPath = "/panel?bienvenida=1" }: { nextPath?: string } = {}) {
   const router = useRouter();
   const [step, setStep] = useState<Step>("phone");
   const [phone, setPhone] = useState("");
@@ -42,7 +42,7 @@ export function SignInCard() {
     run(async () => {
       await verifyCode(code);
       setStep("done");
-      router.push("/panel?bienvenida=1");
+      router.push(nextPath);
     });
 
   return (
@@ -61,7 +61,7 @@ export function SignInCard() {
       )}
       {step === "done" && (
         <p className="mt-4 rounded-2xl bg-exito-claro p-5 text-tinta" role="status">
-          Entraste a Condorin con el {formatPhone(phone)}. Te llevamos a tu panel…
+          Entraste a Ojo de Cóndor con el {formatPhone(phone)}. {nextPath.startsWith("/panel") ? "Te llevamos a tu panel…" : "Te llevamos de vuelta…"}
         </p>
       )}
 

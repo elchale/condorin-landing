@@ -6,10 +6,11 @@ import { PETITION_URL } from "@/lib/links";
 import mascot from "../../../public/brand/condor-thumbsup.png";
 import river from "../../../public/img/rio.jpg";
 
-export function Hero() {
+/** `nav={false}` when the page already has its own top bar (/acerca). */
+export function Hero({ nav = true, entrarHref = "#entrar" }: { nav?: boolean; entrarHref?: string } = {}) {
   return (
     <header className="bg-white">
-      <SiteNav />
+      {nav && <SiteNav />}
 
       {/* Text first on mobile, the river right under it; side by side from lg up */}
       <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-4 pb-12 pt-6 sm:px-6 lg:grid-cols-2 lg:items-center lg:gap-14 lg:pb-20 lg:pt-12 [&>*]:min-w-0">
@@ -21,8 +22,8 @@ export function Hero() {
             Dragas y tajos abiertos, detectados por satélite. Te avisamos al instante por WhatsApp.
           </p>
           <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-            <ButtonLink href="#entrar">
-              Entrar a Condorin <Icon name="arrow" className="size-5" />
+            <ButtonLink href={entrarHref}>
+              Entrar a Ojo de Cóndor <Icon name="arrow" className="size-5" />
             </ButtonLink>
             <ButtonLink href="#como-funciona" variant="outline">
               Cómo funciona

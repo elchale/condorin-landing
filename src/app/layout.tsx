@@ -5,7 +5,7 @@ import "./globals.css";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
 
-const TITLE = "Condorin · Vigilamos la minería ilegal en la Amazonía";
+const TITLE = "Ojo de Cóndor · Vigilamos la minería ilegal en la Amazonía";
 const DESCRIPTION =
   "Dragas y tajos abiertos, detectados por satélite. Te avisamos al instante por WhatsApp.";
 
@@ -13,11 +13,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl()),
   title: TITLE,
   description: DESCRIPTION,
-  applicationName: "Condorin",
+  applicationName: "Ojo de Cóndor",
   openGraph: {
     type: "website",
     locale: "es_PE",
-    siteName: "Condorin",
+    siteName: "Ojo de Cóndor",
     title: TITLE,
     description: DESCRIPTION,
     url: "/",

@@ -20,7 +20,7 @@ export default async function AdminOverviewPage() {
 
   return (
     <>
-      <PageHeader title="Resumen" description="Lo principal de Condorin en un vistazo." />
+      <PageHeader title="Resumen" description="Lo principal de Ojo de Cóndor en un vistazo." />
 
       <dl className="grid gap-3 sm:grid-cols-3">
         {cards.map(({ label, value }) => (

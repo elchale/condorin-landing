@@ -20,7 +20,7 @@ const TARGETS = [
 export function DetectsSection() {
   return (
     <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:py-20">
-      <h2 className="text-3xl font-black tracking-tight sm:text-4xl">¿Qué detecta Condorin?</h2>
+      <h2 className="text-3xl font-black tracking-tight sm:text-4xl">¿Qué detecta Ojo de Cóndor?</h2>
       <p className="mt-3 max-w-2xl text-lg text-gris">Dos formas de minería ilegal de oro que dejan huella visible desde el espacio.</p>
       <div className="mt-8 grid gap-6 md:grid-cols-2">
         {TARGETS.map((t) => (

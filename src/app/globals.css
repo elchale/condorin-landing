@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* Condorin brand, taken from perushop-frontend/src/styles/variables.css (red-brand + zinc grays).
+/* Ojo de Cóndor brand, taken from perushop-frontend/src/styles/variables.css (red-brand + zinc grays).
    Swap these values (and only these) to rebrand. */
 :root {
   --marca: #e11d2e;

@@ -6,7 +6,7 @@ export const dynamic = "force-dynamic";
 
 // The token in the URL opens the expediente, so it must not leak to other sites or search engines.
 export const metadata: Metadata = {
-  title: "Expediente · Condorin",
+  title: "Expediente · Ojo de Cóndor",
   robots: { index: false, follow: false },
   referrer: "no-referrer",
 };

@@ -18,7 +18,7 @@ export function MercurySection() {
         <aside className="rounded-3xl bg-naranja-claro p-6 sm:p-8">
           <h3 className="text-xl font-bold">¿Viste una draga o una zona minera?</h3>
           <p className="mt-2">
-            Denúnciala ante la fiscalía ambiental o la autoridad ambiental de tu región. Condorin te ayuda a vigilar, pero no reemplaza la denuncia oficial.
+            Denúnciala ante la fiscalía ambiental o la autoridad ambiental de tu región. Ojo de Cóndor te ayuda a vigilar, pero no reemplaza la denuncia oficial.
           </p>
         </aside>
       </div>

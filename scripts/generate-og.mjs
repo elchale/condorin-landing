@@ -19,7 +19,7 @@ const overlay = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${
     </linearGradient>
   </defs>
   <rect width="${W}" height="${H}" fill="url(#fade)"/>
-  <text x="168" y="118" font-family="${FONT}" font-size="44" font-weight="900" fill="#fff">Condorin</text>
+  <text x="168" y="118" font-family="${FONT}" font-size="44" font-weight="900" fill="#fff">Ojo de Cóndor</text>
   <text font-family="${FONT}" font-size="60" font-weight="900" fill="#fff">
     <tspan x="70" y="250">Vigilamos la</tspan>
     <tspan x="70" y="324" fill="#ff4d5a">minería ilegal</tspan>

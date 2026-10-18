@@ -29,7 +29,7 @@ export function SiteFooter() {
           <Link href="/privacidad" className="underline underline-offset-4 hover:text-white/80">Política de privacidad</Link>
           <Link href="/terminos" className="underline underline-offset-4 hover:text-white/80">Términos y condiciones</Link>
         </nav>
-        <p className="text-sm text-white/60">Condorin no es una entidad del Estado peruano.</p>
+        <p className="text-sm text-white/60">Ojo de Cóndor no es una entidad del Estado peruano.</p>
         <p className="text-xs leading-relaxed text-white/45">
           Fotos:{" "}
           {PHOTO_CREDITS.map((c, i) => (

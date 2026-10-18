@@ -23,7 +23,7 @@ export async function notifyNewMember(phone: string) {
 
     await sendMail({
       to: admins.map((a) => a.email),
-      subject: `Nuevo usuario en Condorin: ${number}`,
+      subject: `Nuevo usuario en Ojo de Cóndor: ${number}`,
       text: `Se registró ${number} el ${when}.\nYa son ${total} usuarios.\n\nVer usuarios: ${link}`,
       html: `<p>Se registró <strong>${escapeHtml(number)}</strong> el ${escapeHtml(when)}.</p>
 <p>Ya son ${total} usuarios.</p>

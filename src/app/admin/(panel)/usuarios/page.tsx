@@ -26,7 +26,7 @@ export default async function AdminUsersPage({ searchParams }: { searchParams: S
 
   return (
     <>
-      <PageHeader title="Usuarios" description="Personas que entraron a Condorin con su número de WhatsApp." />
+      <PageHeader title="Usuarios" description="Personas que entraron a Ojo de Cóndor con su número de WhatsApp." />
 
       <form className="flex gap-2" role="search">
         <label htmlFor="q" className="sr-only">

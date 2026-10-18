@@ -4,25 +4,25 @@ import { LegalPage, LegalSection } from "@/components/legal/LegalPage";
 import { COMPANY } from "@/lib/company";
 
 export const metadata: Metadata = {
-  title: "Términos y condiciones · Condorin",
-  description: "Condiciones de uso del servicio de alertas Condorin.",
+  title: "Términos y condiciones · Ojo de Cóndor",
+  description: "Condiciones de uso del servicio de alertas Ojo de Cóndor.",
 };
 
 export default function TermsPage() {
   return (
     <LegalPage title="Términos y condiciones">
-      <p>Al iniciar sesión en Condorin aceptas estos términos. Léelos con calma: son cortos.</p>
+      <p>Al iniciar sesión en Ojo de Cóndor aceptas estos términos. Léelos con calma: son cortos.</p>
 
       <LegalSection title="1. Quién presta el servicio">
         <p>
-          Condorin es un servicio de {COMPANY.legalName}, con RUC {COMPANY.ruc} y domicilio en {COMPANY.address}. Contacto:{" "}
+          Ojo de Cóndor es un servicio de {COMPANY.legalName}, con RUC {COMPANY.ruc} y domicilio en {COMPANY.address}. Contacto:{" "}
           <a href={`mailto:${COMPANY.email}`} className="font-medium text-marca underline underline-offset-2">{COMPANY.email}</a>.
         </p>
       </LegalSection>
 
-      <LegalSection title="2. Qué es Condorin">
+      <LegalSection title="2. Qué es Ojo de Cóndor">
         <p>
-          Condorin analiza imágenes satelitales para identificar posible actividad de minería ilegal, como dragas en ríos o
+          Ojo de Cóndor analiza imágenes satelitales para identificar posible actividad de minería ilegal, como dragas en ríos o
           tajos abiertos, y envía alertas informativas por WhatsApp. El servicio es gratuito y puede cambiar mientras lo
           mejoramos.
         </p>
@@ -36,7 +36,7 @@ export default function TermsPage() {
       </LegalSection>
 
       <LegalSection title="4. Uso permitido">
-        <p>No puedes usar Condorin para:</p>
+        <p>No puedes usar Ojo de Cóndor para:</p>
         <ul>
           <li>Cometer o facilitar actos ilícitos.</li>
           <li>Amenazar, hostigar o exponer a otras personas.</li>
@@ -56,14 +56,14 @@ export default function TermsPage() {
 
       <LegalSection title="6. Disponibilidad">
         <p>
-          Hacemos lo posible para que Condorin funcione siempre, pero no garantizamos que esté disponible sin interrupciones
+          Hacemos lo posible para que Ojo de Cóndor funcione siempre, pero no garantizamos que esté disponible sin interrupciones
           ni que detecte toda la actividad minera. Podemos suspender o modificar el servicio cuando sea necesario.
         </p>
       </LegalSection>
 
       <LegalSection title="7. Propiedad intelectual">
         <p>
-          La marca Condorin, su logotipo y el software son de {COMPANY.legalName}. Las imágenes de terceros se usan según sus
+          La marca Ojo de Cóndor, su logotipo y el software son de {COMPANY.legalName}. Las imágenes de terceros se usan según sus
           licencias, indicadas en el pie de página.
         </p>
       </LegalSection>
@@ -84,7 +84,7 @@ export default function TermsPage() {
 
       <LegalSection title="10. Fin del servicio">
         <p>
-          Puedes dejar de usar Condorin y pedir que eliminemos tu cuenta cuando quieras. Podemos cerrar cuentas que incumplan
+          Puedes dejar de usar Ojo de Cóndor y pedir que eliminemos tu cuenta cuando quieras. Podemos cerrar cuentas que incumplan
           estos términos.
         </p>
       </LegalSection>

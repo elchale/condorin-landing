@@ -58,7 +58,7 @@ export function AlertSection({ incident }: { incident: Payload["incident"] }) {
       <p className="mt-4 text-sm">{incident.place}.</p>
       {history.length > 0 && (
         <p className="mt-3 rounded-2xl bg-naranja-claro p-4 text-sm">
-          Ya se detectó actividad cerca de aquí el {history.map((h) => h.label).join(", el ")}. Condorin lo agrega a la denuncia.
+          Ya se detectó actividad cerca de aquí el {history.map((h) => h.label).join(", el ")}. Ojo de Cóndor lo agrega a la denuncia.
         </p>
       )}
       {history[0]?.preview_url && scene.preview_url && (

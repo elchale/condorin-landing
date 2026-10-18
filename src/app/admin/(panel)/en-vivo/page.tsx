@@ -21,7 +21,7 @@ export default async function AdminLivePage({ searchParams }: { searchParams: Se
 
   return (
     <>
-      <PageHeader title="En vivo" description="Cada detección del satélite y lo que Condorin decidió, en tiempo real." />
+      <PageHeader title="En vivo" description="Cada detección del satélite y lo que Ojo de Cóndor decidió, en tiempo real." />
       <LiveFeed initial={initial} demo={demoMode} />
     </>
   );

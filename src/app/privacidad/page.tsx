@@ -3,8 +3,8 @@ import { LegalPage, LegalSection } from "@/components/legal/LegalPage";
 import { COMPANY } from "@/lib/company";
 
 export const metadata: Metadata = {
-  title: "Política de privacidad · Condorin",
-  description: "Cómo Condorin trata tus datos personales, conforme a la Ley N.° 29733.",
+  title: "Política de privacidad · Ojo de Cóndor",
+  description: "Cómo Ojo de Cóndor trata tus datos personales, conforme a la Ley N.° 29733.",
 };
 
 const Email = () => (
@@ -17,7 +17,7 @@ export default function PrivacyPage() {
   return (
     <LegalPage title="Política de privacidad">
       <p>
-        Esta política explica cómo tratamos tus datos personales cuando usas Condorin, conforme a la Ley N.° 29733, Ley de
+        Esta política explica cómo tratamos tus datos personales cuando usas Ojo de Cóndor, conforme a la Ley N.° 29733, Ley de
         Protección de Datos Personales, y su Reglamento aprobado por Decreto Supremo N.° 016-2024-JUS.
       </p>
 
@@ -38,7 +38,7 @@ export default function PrivacyPage() {
 
       <LegalSection title="3. Para qué usamos tus datos">
         <ul>
-          <li>Verificar tu número y darte acceso a Condorin.</li>
+          <li>Verificar tu número y darte acceso a Ojo de Cóndor.</li>
           <li>Enviarte por WhatsApp alertas sobre minería ilegal.</li>
         </ul>
         <p>No vendemos tus datos ni los usamos para publicidad de terceros.</p>
@@ -66,7 +66,7 @@ export default function PrivacyPage() {
       <LegalSection title="6. Banco de datos y conservación">
         <p>
           Tus datos se guardan en bancos de datos personales de {COMPANY.legalName} inscritos ante la Autoridad Nacional de
-          Protección de Datos Personales. Los conservamos mientras tengas una cuenta en Condorin. Si pides eliminarla, los
+          Protección de Datos Personales. Los conservamos mientras tengas una cuenta en Ojo de Cóndor. Si pides eliminarla, los
           borramos, salvo lo que debamos conservar por obligación legal.
         </p>
       </LegalSection>
@@ -91,7 +91,7 @@ export default function PrivacyPage() {
       </LegalSection>
 
       <LegalSection title="9. Menores de edad">
-        <p>Si tienes menos de 14 años, necesitas la autorización de tu madre, padre o tutor para usar Condorin.</p>
+        <p>Si tienes menos de 14 años, necesitas la autorización de tu madre, padre o tutor para usar Ojo de Cóndor.</p>
       </LegalSection>
 
       <LegalSection title="10. Cookies">

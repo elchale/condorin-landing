@@ -24,7 +24,7 @@ export default async function AdminLoginPage({ searchParams }: { searchParams: P
     <main className="flex min-h-screen items-center justify-center px-4 py-16">
       <div className="w-full max-w-sm rounded-3xl bg-white p-8 ring-1 ring-borde">
         <CondorMark size={48} />
-        <h1 className="mt-4 text-2xl font-black tracking-tight">Panel de Condorin</h1>
+        <h1 className="mt-4 text-2xl font-black tracking-tight">Panel de Ojo de Cóndor</h1>
         <p className="mt-1 text-sm text-gris">Entra con tu cuenta de Google autorizada.</p>
 
         {message ? (

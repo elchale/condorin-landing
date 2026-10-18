@@ -7,7 +7,7 @@ import { loadPanel } from "@/lib/panel";
 import { requirePhone } from "@/lib/session";
 
 export const dynamic = "force-dynamic";
-export const metadata: Metadata = { title: "Mi panel · Condorin", robots: { index: false, follow: false } };
+export const metadata: Metadata = { title: "Mi panel · Ojo de Cóndor", robots: { index: false, follow: false } };
 
 export default async function PanelPage({ searchParams }: { searchParams: Promise<{ error?: string; bienvenida?: string }> }) {
   const phone = await requirePhone();

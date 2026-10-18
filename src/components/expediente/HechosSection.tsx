@@ -8,7 +8,7 @@ type Props = {
   onSave: (name: keyof Payload["expediente"], value: string) => void;
 };
 
-/** Screen 3: the facts, already drafted by Condorin, plus what only the community knows. */
+/** Screen 3: the facts, already drafted by Ojo de Cóndor, plus what only the community knows. */
 export function HechosSection({ expediente: e, errors, onSave }: Props) {
   return (
     <section aria-labelledby="que" className={card}>
@@ -19,7 +19,7 @@ export function HechosSection({ expediente: e, errors, onSave }: Props) {
         <AutoField
           name="facts"
           label="Hechos"
-          hint="Condorin ya los escribió con los datos del satélite. Revisa y corrige si hace falta."
+          hint="Ojo de Cóndor ya los escribió con los datos del satélite. Revisa y corrige si hace falta."
           value={e.facts}
           error={errors.facts ?? e.missing.facts}
           onSave={onSave}

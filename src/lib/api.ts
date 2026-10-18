@@ -14,7 +14,7 @@ type Options = {
 };
 
 const UNREACHABLE: ApiError = {
-  message: "No pudimos conectarnos con Condorin. Inténtalo otra vez en un momento.",
+  message: "No pudimos conectarnos con Ojo de Cóndor. Inténtalo otra vez en un momento.",
   type: "api_unreachable",
   field_errors: {},
 };

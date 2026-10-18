@@ -65,11 +65,16 @@ export function EventoApp({ token, signedIn: initiallySignedIn }: { token: strin
               Todos los eventos
             </Link>
           ) : (
-            <Link href="/" aria-label="Condorin, inicio">
+            <Link href="/" aria-label="Ojo de Cóndor, inicio">
               <Logo />
             </Link>
           )}
-          {data && <span className="truncate text-sm text-gris">{data.ong.name}</span>}
+          <div className="flex min-w-0 items-center gap-3">
+            {data && <span className="hidden truncate text-sm text-gris sm:inline">{data.ong.name}</span>}
+            <Link href="/" className="flex min-h-11 shrink-0 items-center text-sm font-semibold text-marca hover:text-marca-2">
+              Volver al mapa
+            </Link>
+          </div>
         </div>
       </header>
 

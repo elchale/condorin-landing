@@ -53,6 +53,6 @@ export const env = {
     return required("PANEL_API_SECRET");
   },
   get mailFrom() {
-    return process.env.MAIL_FROM ?? "Condorin <info@qolca.org>";
+    return process.env.MAIL_FROM ?? "Ojo de Cóndor <info@qolca.org>";
   },
 };

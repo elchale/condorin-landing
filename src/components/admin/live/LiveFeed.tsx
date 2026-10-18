@@ -385,7 +385,7 @@ function EmptyState({ unavailable }: { unavailable: boolean }) {
       <p className="mx-auto mt-1 max-w-md text-gris">
         {unavailable
           ? "Seguimos intentando. Mientras tanto puedes ver cómo se verá con datos simulados."
-          : "Cuando el satélite envíe una escena aparecerá aquí al instante, con cada decisión que tome Condorin."}
+          : "Cuando el satélite envíe una escena aparecerá aquí al instante, con cada decisión que tome Ojo de Cóndor."}
       </p>
       <Link
         href="/admin/en-vivo?demo=1"

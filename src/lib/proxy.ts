@@ -27,7 +27,7 @@ export async function forwardToApi(req: Request, path: string) {
     });
   } catch {
     return Response.json(
-      { message: "No pudimos conectarnos con Condorin. Inténtalo otra vez.", type: "api_unreachable", field_errors: {} },
+      { message: "No pudimos conectarnos con Ojo de Cóndor. Inténtalo otra vez.", type: "api_unreachable", field_errors: {} },
       { status: 503 },
     );
   }

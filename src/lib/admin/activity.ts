@@ -1,6 +1,6 @@
 /**
  * Contract of GET {API}/api/v1/panel/actividad (condorin-backend, panel app), shown live in /admin/en-vivo.
- * One event per satellite scene the detector posted, with every decision Condorin took about it.
+ * One event per satellite scene the detector posted, with every decision Ojo de Cóndor took about it.
  * Steps are computed by the backend, in order; the frontend only shows and animates them.
  */
 
@@ -77,7 +77,7 @@ export type ActivityEvent = {
   /** The routing outcome in one word. */
   decision: "alerted" | "below_threshold" | "no_watchers";
   ongs: ActivityOng[];
-  /** Authorities Condorin preselects for this river (primary, plus SERNANP inside a protected area). */
+  /** Authorities Ojo de Cóndor preselects for this river (primary, plus SERNANP inside a protected area). */
   authorities_suggested: string[];
   steps: ActivityStep[];
 };

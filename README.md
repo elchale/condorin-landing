@@ -1,8 +1,8 @@
-# Condorin
+# Ojo de Cóndor
 
-Condorin monitors illegal gold mining in the Peruvian Amazon (river dredges and open-pit mines) from satellite imagery and alerts people by WhatsApp.
+Ojo de Cóndor monitors illegal gold mining in the Peruvian Amazon (river dredges and open-pit mines) from satellite imagery and alerts people by WhatsApp.
 
-This repository is the public site: the landing page, WhatsApp sign in, the ONG member panel and the expediente page.
+This repository is the public site: the live map, the about page, WhatsApp sign in, the ONG member panel and the expediente page.
 
 ## Stack
 
@@ -42,6 +42,23 @@ Limits: one code per number every 45 seconds, 5 attempts per code, 10-minute exp
 - Opening an alert link also signs the member in (`POST /api/enlace`): see "Signing in from the WhatsApp link"
   in the backend README for why that is safe and its limits (7 days, never replaces a session, no bots).
 
+## Map dashboard, sign in and about
+
+- `/` is the map dashboard (dark operations console). The server renders the KPIs, river list, detection list and
+  activity as HTML; the Leaflet map (`src/components/mapa/MapaMap.tsx`) is code split and mounts when the browser is
+  idle or on the first touch. Signed in members see their ONG rivers highlighted and a "Mis detecciones" filter.
+- `/entrar` is the WhatsApp sign in. Afterwards it goes to `/?bienvenida=1` (welcome overlay, then the map), or to
+  `?next=` when that is a same site path (`src/lib/next-path.ts`). `requirePhone()` sends signed out members here.
+- `/acerca` keeps the former landing content plus "Qué decidimos y qué quedó fuera".
+
+Data flow for `/` (`src/lib/mapa.ts`):
+
+1. Server side `fetch` of `GET {CONDORIN_API_URL}/api/v1/mapa`, cached 60 seconds by Next.
+2. On any error, timeout or non 200 (including 404 before the endpoint ships) it uses `src/data/mapa-snapshot.json`,
+   exported from production by the backend (`manage.py export_mapa`). The page shows "EN VIVO" or "RESPALDO".
+3. Static open data layers come from `public/data/layers.json` (bundled at build; an empty list hides the Capas tab).
+   Each GeoJSON file in `public/data/` is fetched only when its toggle is turned on.
+
 ## Admin panel
 
 `/admin` is a private panel (not indexed) that signs in with Google.
@@ -50,7 +67,7 @@ Limits: one code per number every 45 seconds, 5 attempts per code, 10-minute exp
 2. `GET /api/admin/oauth/callback` exchanges the code server side, checks the id_token, and issues an 8-hour signed session cookie only if the verified email has an active row in the `Admin` table.
 3. Every admin page calls `requireAdmin()`, which re-checks that row on each request, so setting `active = false` locks someone out immediately.
 
-`/admin/en-vivo` shows every satellite scene as it arrives and animates each decision Condorin took about it (threshold, ONGs, WhatsApp alerts, expediente, filing). It polls `GET /api/admin/actividad` every 4 seconds, an admin only proxy to the API's `/api/v1/panel/actividad`. Open `/admin/en-vivo?demo=1` for a demonstration with simulated data (a new scene about every 12 seconds that advances over time); the page also offers it when the API is unavailable or has no events.
+`/admin/en-vivo` shows every satellite scene as it arrives and animates each decision Ojo de Cóndor took about it (threshold, ONGs, WhatsApp alerts, expediente, filing). It polls `GET /api/admin/actividad` every 4 seconds, an admin only proxy to the API's `/api/v1/panel/actividad`. Open `/admin/en-vivo?demo=1` for a demonstration with simulated data (a new scene about every 12 seconds that advances over time); the page also offers it when the API is unavailable or has no events.
 
 Add an admin directly in the database:
 

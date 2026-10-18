@@ -166,7 +166,7 @@ function Frame({ signedIn, saveState = "idle", children }: { signedIn: boolean; 
     <div className="min-h-dvh bg-fondo">
       <header className="sticky top-0 z-10 bg-white shadow-sm">
         <div className="mx-auto flex max-w-2xl items-center justify-between gap-3 px-4 py-3">
-          <Link href={signedIn ? "/panel" : "/"} aria-label={signedIn ? "Mi panel" : "Condorin, inicio"}>
+          <Link href={signedIn ? "/panel" : "/"} aria-label={signedIn ? "Mi panel" : "Ojo de Cóndor, inicio"}>
             <Logo />
           </Link>
           <div className="flex items-center gap-4 text-sm">
@@ -174,10 +174,14 @@ function Frame({ signedIn, saveState = "idle", children }: { signedIn: boolean; 
               {SAVE_LABEL[saveState]}
             </span>
             {signedIn && (
-              <Link href="/panel" className="font-semibold text-marca underline underline-offset-2">
+              <Link href="/panel" className="hidden font-semibold text-marca underline underline-offset-2 sm:inline">
                 Mi panel
               </Link>
             )}
+            <Link href="/" className="flex min-h-11 items-center font-semibold text-marca underline underline-offset-2">
+              <span className="sm:hidden">Mapa</span>
+              <span className="hidden sm:inline">Volver al mapa</span>
+            </Link>
           </div>
         </div>
       </header>
