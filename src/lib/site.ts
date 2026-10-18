@@ -1,3 +1,6 @@
+/** Display name of the product. Technical ids (repos, cookies, domains) keep "condorin". */
+export const BRAND_NAME = "Ojo de Cóndor";
+
 /**
  * Absolute base URL of the site. Link previews (WhatsApp, social networks) need absolute image
  * URLs, so this must never fall back to localhost in a deployment.

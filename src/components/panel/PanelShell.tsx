@@ -22,6 +22,10 @@ export function PanelShell({ member, ongName, children }: Props) {
                 {ongName && <span className="block truncate text-gris">{ongName}</span>}
               </p>
             )}
+            <Link href="/" className="flex min-h-11 items-center text-sm font-semibold text-marca hover:text-marca-2">
+              <span className="sm:hidden">Mapa</span>
+              <span className="hidden sm:inline">Volver al mapa</span>
+            </Link>
             <form action="/api/salir" method="post">
               <button type="submit" className="flex items-center gap-1 text-sm font-semibold text-gris hover:text-tinta">
                 <Icon name="logout" className="size-5" />
