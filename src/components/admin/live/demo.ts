@@ -2,6 +2,10 @@
  * Demo mode for /admin/en-vivo (?demo=1): a small simulated world that produces ActivityFeeds with the
  * same shape and wording as the backend. A scene arrives about every 12 s and the alerted ones advance
  * over time (alerts sent, expediente opened, confirmed, filed), so an audience can watch decisions move.
+ *
+ * DEMO ONLY, not real data. Every ONG, member, phone ending, river and scene below is made up, runs
+ * only in the browser, and never touches the API. Only used when the page runs with ?demo=1, where
+ * the status bar says "Demostración, datos simulados".
  */
 import type {
   ActivityAlert,
