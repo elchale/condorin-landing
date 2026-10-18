@@ -50,6 +50,8 @@ Limits: one code per number every 45 seconds, 5 attempts per code, 10-minute exp
 2. `GET /api/admin/oauth/callback` exchanges the code server side, checks the id_token, and issues an 8-hour signed session cookie only if the verified email has an active row in the `Admin` table.
 3. Every admin page calls `requireAdmin()`, which re-checks that row on each request, so setting `active = false` locks someone out immediately.
 
+`/admin/en-vivo` shows every satellite scene as it arrives and animates each decision Condorin took about it (threshold, ONGs, WhatsApp alerts, expediente, filing). It polls `GET /api/admin/actividad` every 4 seconds, an admin only proxy to the API's `/api/v1/panel/actividad`. Open `/admin/en-vivo?demo=1` for a demonstration with simulated data (a new scene about every 12 seconds that advances over time); the page also offers it when the API is unavailable or has no events.
+
 Add an admin directly in the database:
 
 ```sql
