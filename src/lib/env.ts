@@ -45,6 +45,13 @@ export const env = {
   get smtpPass() {
     return required("SMTP_PASS");
   },
+  // The Django API (condorin-backend). Only this server talks to it; browsers go through /api/expedientes.
+  get apiUrl() {
+    return (process.env.CONDORIN_API_URL ?? "https://api.condorin.pe").replace(/\/$/, "");
+  },
+  get panelApiSecret() {
+    return required("PANEL_API_SECRET");
+  },
   get mailFrom() {
     return process.env.MAIL_FROM ?? "Condorin <info@qolca.org>";
   },

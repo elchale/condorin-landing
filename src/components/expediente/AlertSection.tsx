@@ -1,0 +1,71 @@
+import { Icon } from "@/components/ui/Icon";
+import type { Payload } from "./types";
+import { card, textLink } from "./ui";
+
+const dragas = (n: number) => (n === 1 ? "1 posible draga" : `${n} posibles dragas`);
+
+/** Screen 1: what the satellite saw, with the evidence images. Read only. */
+export function AlertSection({ incident }: { incident: Payload["incident"] }) {
+  const { detections, history, scene } = incident;
+  const best = detections[0];
+
+  return (
+    <section aria-labelledby="alerta" className={card}>
+      <h2 id="alerta" className="text-xl font-black tracking-tight sm:text-2xl">
+        {dragas(detections.length)} en el río {incident.river.name}
+      </h2>
+      <p className="mt-1 text-gris">
+        {incident.captured_at_label} · {incident.satellite}
+      </p>
+
+      <ul className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+        {detections.map((d, i) => (
+          <li key={i} className="min-w-0 overflow-hidden rounded-2xl bg-fondo ring-1 ring-borde">
+            <div className="aspect-[4/3] bg-tinta">
+              {d.crop_url ? (
+                // Signed links that expire: shown as is, never cached by next/image.
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={d.crop_url} alt={`Recorte ${i + 1} de la imagen satelital`} className="size-full object-cover" />
+              ) : (
+                <div className="flex size-full flex-col items-center justify-center gap-2 p-4 text-center text-white/70">
+                  <Icon name="satellite" className="size-8" />
+                  <span className="text-sm">La imagen de evidencia se está preparando</span>
+                </div>
+              )}
+            </div>
+            <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 p-3 text-sm">
+              <dt className="text-gris">Confianza</dt>
+              <dd className="font-semibold tabular-nums">{Math.round(d.confidence * 100)}%</dd>
+              <dt className="text-gris">WGS84</dt>
+              <dd className="break-words tabular-nums">
+                {d.lat}, {d.lon}
+              </dd>
+              <dt className="text-gris">UTM</dt>
+              <dd className="break-words tabular-nums">{d.utm}</dd>
+            </dl>
+          </li>
+        ))}
+      </ul>
+
+      <p className="mt-4 text-sm">{incident.place}.</p>
+      {history.length > 0 && (
+        <p className="mt-3 rounded-2xl bg-naranja-claro p-4 text-sm">
+          Ya se detectó actividad cerca de aquí el {history.map((h) => h.label).join(", el ")}. Condorin lo agrega a la denuncia.
+        </p>
+      )}
+
+      <div className="mt-4 flex flex-col gap-2 text-sm sm:flex-row sm:gap-6">
+        {best && (
+          <a href={best.maps_url} target="_blank" rel="noopener noreferrer" className={textLink}>
+            Ver en el mapa
+          </a>
+        )}
+        {scene.download_url && (
+          <a href={scene.download_url} className={textLink}>
+            Descargar imagen original
+          </a>
+        )}
+      </div>
+    </section>
+  );
+}

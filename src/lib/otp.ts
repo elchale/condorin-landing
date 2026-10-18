@@ -4,11 +4,14 @@ import { env } from "./env";
 
 const CODE_TTL_MS = 10 * 60 * 1000;
 const SESSION_TTL_MS = 30 * 24 * 60 * 60 * 1000;
+// Signing in from a WhatsApp alert link is easier to pass on than a code, so it lasts less.
+const LINK_SESSION_TTL_MS = 7 * 24 * 60 * 60 * 1000;
 
 export const PENDING_COOKIE = "cdn_otp";
 export const SESSION_COOKIE = "cdn_session";
 export const CODE_TTL_SECONDS = CODE_TTL_MS / 1000;
 export const SESSION_TTL_SECONDS = SESSION_TTL_MS / 1000;
+export const LINK_SESSION_TTL_SECONDS = LINK_SESSION_TTL_MS / 1000;
 
 function sign(value: string) {
   return createHmac("sha256", env.otpSecret).update(value).digest("base64url");
@@ -40,5 +43,6 @@ export function newCode() {
 export const pendingToken = (phone: string, code: string) => issue("otp", phone, CODE_TTL_MS, code);
 export const checkPending = (token: string | undefined, code: string) => verify("otp", token, code);
 
-export const sessionToken = (phone: string) => issue("session", phone, SESSION_TTL_MS);
+export const sessionToken = (phone: string, ttlSeconds = SESSION_TTL_SECONDS) =>
+  issue("session", phone, ttlSeconds * 1000);
 export const readSession = (token: string | undefined) => verify("session", token);

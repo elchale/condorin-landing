@@ -2,7 +2,7 @@
 
 Condorin monitors illegal gold mining in the Peruvian Amazon (river dredges and open-pit mines) from satellite imagery and alerts people by WhatsApp.
 
-This repository is the public site: a landing page where people sign in with their WhatsApp number.
+This repository is the public site: the landing page, WhatsApp sign in, the ONG member panel and the expediente page.
 
 ## Stack
 
@@ -29,6 +29,18 @@ Open http://localhost:3000.
 3. `POST /api/otp/verify` recomputes the HMAC and, on match, records the member in Postgres and sets a signed session cookie (30 days).
 
 Limits: one code per number every 45 seconds, 5 attempts per code, 10-minute expiry.
+
+## Member panel and expediente
+
+- After sign in, `/panel` shows the member's ONG, its detections with the evidence crops, and the next action for
+  each (create, continue, file, view). Data comes from the Django API (`/api/v1/panel`), called only from this
+  server with `PANEL_API_SECRET` and the signed in phone. For the demo, the API adds every new person to a
+  default ONG (TODO in the backend).
+- `/expediente/<token>` is the page the WhatsApp alert opens. The token is its whole auth; the browser talks to
+  the API through `/api/expedientes/<token>` (same origin, no CORS). Fields autosave on blur; confirming needs a
+  WhatsApp code.
+- Opening an alert link also signs the member in (`POST /api/enlace`): see "Signing in from the WhatsApp link"
+  in the backend README for why that is safe and its limits (7 days, never replaces a session, no bots).
 
 ## Admin panel
 
@@ -58,6 +70,8 @@ src/
     brand/              logo, nav, footer
     landing/            one file per landing section
     signin/             sign-in card and one component per step
+    panel/              member panel: shell, totals, incident card
+    expediente/         expediente page: one component per screen, autosave field, API client
     legal/              shared layout for legal pages
     ui/                 icons and buttons
   lib/                  server helpers: env, db, members, otp, whatsapp, rate limit

@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { formatPhone } from "@/lib/phone";
 import { requestCode, verifyCode } from "./api";
@@ -8,8 +9,9 @@ import { PhoneStep } from "./PhoneStep";
 
 type Step = "phone" | "code" | "done";
 
-/** Phone number → WhatsApp code → signed in. */
+/** Phone number → WhatsApp code → signed in, straight to the member panel. */
 export function SignInCard() {
+  const router = useRouter();
   const [step, setStep] = useState<Step>("phone");
   const [phone, setPhone] = useState("");
   const [consent, setConsent] = useState(false);
@@ -40,6 +42,7 @@ export function SignInCard() {
     run(async () => {
       await verifyCode(code);
       setStep("done");
+      router.push("/panel");
     });
 
   return (
@@ -58,7 +61,7 @@ export function SignInCard() {
       )}
       {step === "done" && (
         <p className="mt-4 rounded-2xl bg-exito-claro p-5 text-tinta" role="status">
-          Entraste a Condorin con el {formatPhone(phone)}.
+          Entraste a Condorin con el {formatPhone(phone)}. Te llevamos a tu panel…
         </p>
       )}
 
