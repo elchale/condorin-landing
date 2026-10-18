@@ -1,4 +1,5 @@
 import { Icon } from "@/components/ui/Icon";
+import { ScenePreview } from "./ScenePreview";
 import type { Payload } from "./types";
 import { card, textLink } from "./ui";
 
@@ -18,7 +19,12 @@ export function AlertSection({ incident }: { incident: Payload["incident"] }) {
         {incident.captured_at_label} · {incident.satellite}
       </p>
 
-      <ul className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+      <div className="mt-4">
+        <ScenePreview scene={scene} river={incident.river.name} />
+      </div>
+
+      <h3 className="mt-5 font-bold">Recortes de cada detección</h3>
+      <ul className="mt-2 grid grid-cols-1 gap-3 sm:grid-cols-2">
         {detections.map((d, i) => (
           <li key={i} className="min-w-0 overflow-hidden rounded-2xl bg-fondo ring-1 ring-borde">
             <div className="aspect-[4/3] bg-tinta">
@@ -34,6 +40,8 @@ export function AlertSection({ incident }: { incident: Payload["incident"] }) {
               )}
             </div>
             <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 p-3 text-sm">
+              <dt className="text-gris">Detección</dt>
+              <dd className="font-semibold">N° {i + 1}</dd>
               <dt className="text-gris">Confianza</dt>
               <dd className="font-semibold tabular-nums">{Math.round(d.confidence * 100)}%</dd>
               <dt className="text-gris">WGS84</dt>
@@ -52,6 +60,23 @@ export function AlertSection({ incident }: { incident: Payload["incident"] }) {
         <p className="mt-3 rounded-2xl bg-naranja-claro p-4 text-sm">
           Ya se detectó actividad cerca de aquí el {history.map((h) => h.label).join(", el ")}. Condorin lo agrega a la denuncia.
         </p>
+      )}
+      {history[0]?.preview_url && scene.preview_url && (
+        <div className="mt-4">
+          <h3 className="font-bold">Antes y ahora</h3>
+          <div className="mt-2 grid grid-cols-2 gap-2">
+            {[
+              { src: history[0].preview_url, label: `Antes · ${history[0].label}` },
+              { src: scene.preview_url, label: `Ahora · ${incident.captured_at_label.split(" a las ")[0]}` },
+            ].map((p) => (
+              <figure key={p.label} className="min-w-0 overflow-hidden rounded-2xl bg-tinta ring-1 ring-borde">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={p.src} alt={`Imagen satelital, ${p.label}`} className="aspect-[4/3] w-full object-cover" />
+                <figcaption className="px-2 py-1.5 text-xs text-white/85">{p.label}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
       )}
 
       <div className="mt-4 flex flex-col gap-2 text-sm sm:flex-row sm:gap-6">

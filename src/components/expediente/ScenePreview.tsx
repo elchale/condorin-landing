@@ -1,0 +1,55 @@
+"use client";
+
+import { useState } from "react";
+import type { Payload } from "./types";
+
+type Scene = Payload["incident"]["scene"];
+
+/**
+ * The whole satellite scene with a box on every detection, as the detector saw it. Boxes are placed in
+ * percentages of the image's natural size, so they stay on target at any width. Numbers match the crops.
+ */
+export function ScenePreview({ scene, river }: { scene: Scene; river: string }) {
+  const [size, setSize] = useState<{ w: number; h: number } | null>(null);
+  if (!scene.preview_url) return null;
+  let n = 0;
+
+  return (
+    <figure className="overflow-hidden rounded-2xl bg-tinta ring-1 ring-borde">
+      <div className="relative">
+        {/* Signed links that expire: shown as is, never cached by next/image. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={scene.preview_url}
+          alt={`Imagen satelital completa del río ${river} con las detecciones marcadas`}
+          className="block h-auto w-full"
+          onLoad={(e) => setSize({ w: e.currentTarget.naturalWidth, h: e.currentTarget.naturalHeight })}
+        />
+        {size &&
+          scene.boxes.map((b, i) => {
+            const [x, y, w, h] = b.bbox;
+            const label = b.alerting ? String(++n) : null;
+            return (
+              <span
+                key={i}
+                className={`absolute rounded-sm ${b.alerting ? "border-2 border-marca shadow-[0_0_0_1px_rgba(0,0,0,0.35)]" : "border border-dashed border-white/70"}`}
+                style={{ left: `${(x / size.w) * 100}%`, top: `${(y / size.h) * 100}%`, width: `${(w / size.w) * 100}%`, height: `${(h / size.h) * 100}%` }}
+              >
+                <span
+                  className={`absolute -top-px left-0 -translate-y-full whitespace-nowrap rounded-t-sm px-1 font-mono text-[10px] font-bold leading-4 sm:text-xs ${
+                    b.alerting ? "bg-marca text-white" : "bg-white/80 text-tinta"
+                  }`}
+                >
+                  {label ? `${label} · ${Math.round(b.confidence * 100)}%` : `${Math.round(b.confidence * 100)}%`}
+                </span>
+              </span>
+            );
+          })}
+      </div>
+      <figcaption className="flex flex-wrap justify-between gap-x-4 gap-y-1 px-3 py-2 text-xs text-white/80">
+        <span>Escena completa · recuadros rojos: superan el umbral</span>
+        {scene.md5_hash && <span className="font-mono">MD5 {scene.md5_hash.slice(0, 12)}…</span>}
+      </figcaption>
+    </figure>
+  );
+}

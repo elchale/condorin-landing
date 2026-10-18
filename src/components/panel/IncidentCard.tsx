@@ -21,8 +21,8 @@ function nextStep(e: Incident["expediente"]) {
   if (!e) return { note: "Nadie de tu ONG ha empezado la denuncia.", button: "Crear expediente", style: primary };
   if (e.status === "draft") {
     const note = e.missing
-      ? `Borrador${e.updated_by ? ` de ${e.updated_by}` : ""}. ${e.missing === 1 ? "Falta 1 dato" : `Faltan ${e.missing} datos`}.`
-      : `Borrador${e.updated_by ? ` de ${e.updated_by}` : ""}, completo. Solo falta confirmarlo.`;
+      ? `Borrador. ${e.missing === 1 ? "Falta 1 dato" : `Faltan ${e.missing} datos`}.`
+      : "Borrador listo. Solo falta revisarlo y confirmarlo.";
     return { note, button: "Continuar expediente", style: primary };
   }
   if (e.status === "ready") {

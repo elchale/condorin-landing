@@ -73,8 +73,17 @@ export type Payload = {
     /** Detections below the confidence threshold, stored but not alerted. */
     discarded: number;
     threshold: number;
-    scene: { uri: string; md5_hash: string; crc32c: string; size_bytes: number | null; download_url: string | null };
-    history: { captured_at: string; label: string; satellite: string; detections: number }[];
+    scene: {
+      uri: string;
+      md5_hash: string;
+      crc32c: string;
+      size_bytes: number | null;
+      download_url: string | null;
+      preview_url: string | null;
+      /** Every detection, discarded ones too; bbox is [x, y, width, height] in scene pixels. */
+      boxes: { bbox: [number, number, number, number]; confidence: number; alerting: boolean }[];
+    };
+    history: { captured_at: string; label: string; satellite: string; detections: number; preview_url: string | null }[];
   };
   authorities: Authority[];
   /** Only in the response that confirms the expediente. */

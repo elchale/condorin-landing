@@ -21,9 +21,8 @@ type Evento = {
 function nextAction(e: Evento["expediente"]) {
   if (!e) return { note: "Nadie de tu ONG ha empezado la denuncia todavía.", button: "Crear expediente" };
   if (e.status === "draft") {
-    const who = e.updated_by ? ` de ${e.updated_by}` : "";
     return {
-      note: e.missing ? `Hay un borrador${who}. ${e.missing === 1 ? "Falta 1 dato" : `Faltan ${e.missing} datos`}.` : `Hay un borrador${who} listo para confirmar.`,
+      note: e.missing ? `Hay un borrador. ${e.missing === 1 ? "Falta 1 dato" : `Faltan ${e.missing} datos`}.` : "Hay un borrador listo para revisar y confirmar.",
       button: "Continuar expediente",
     };
   }
