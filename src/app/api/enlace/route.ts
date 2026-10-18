@@ -16,6 +16,8 @@ import { LINK_SESSION_TTL_SECONDS, SESSION_COOKIE, readSession, sessionToken } f
  */
 export async function POST(req: Request) {
   if (!sameOrigin(req)) return NextResponse.json({ signedIn: false }, { status: 403 });
+  // Which browser alert links really open in (WhatsApp in-app or not), to tune OpenInBrowser.
+  console.info("enlace user-agent:", req.headers.get("user-agent"));
   if (readSession((await cookies()).get(SESSION_COOKIE)?.value)) {
     return NextResponse.json({ signedIn: true });
   }
